@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using api.Data;
 using api.Dtos.Stock;
+using api.Interfaces;
 using api.Mappers;
+using api.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,14 +17,17 @@ namespace api.Controllers
     public class StockController : ControllerBase
     {
         private readonly ApplicationDBContext _context;
-        public StockController(ApplicationDBContext context)
+        private readonly IStockRepository _stockRepo;
+
+        public StockController(IStockRepository stockRepo, ApplicationDBContext context)
         {
             _context = context;
+            _stockRepo = stockRepo;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll(){
-            var stock = await _context.Stocks.ToListAsync();
+            var stock = await _stockRepo.GetAllAsync();
             var stockDto = stock.Select(s => s.ToStockDto());
 
             return Ok(stock);
@@ -82,7 +87,7 @@ namespace api.Controllers
             {
                 return NotFound();
             }
-
+ 
             _context.Stocks.Remove(stockModel);
             await _context.SaveChangesAsync();
 
