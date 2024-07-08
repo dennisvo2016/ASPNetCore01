@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using api.Dtos.Comment;
+using api.Dtos.Stock;
 using api.Interfaces;
 using api.Mappers;
 using Microsoft.AspNetCore.Mvc;
@@ -56,6 +57,32 @@ namespace api.Controllers
             await _commentRepo.CreateAsync(commentModel);
 
             return CreatedAtAction(nameof(GetById), new {id = commentModel.Id}, commentModel.ToCommentDto());
+        }
+
+        [HttpPut("{commentId}")]
+        public async Task<IActionResult> Update([FromRoute] int commentId, [FromBody] UpdateCommentRequestDto updateCommentRequestDto)
+        {
+            if (updateCommentRequestDto.StockId.HasValue)
+            {
+                var stockId = updateCommentRequestDto.StockId;
+                if (!await _stockRepo.StockExist(stockId.Value))
+                {
+                    return BadRequest("StockId does not exist!");    
+                }
+            }
+            else
+            {
+                return BadRequest("StockId does not exist!");
+            }
+
+            var commentModel = await _commentRepo.UpdateAsync(commentId, updateCommentRequestDto);
+
+            if (commentModel == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(commentModel.ToCommentDto());
         }
     }
 }
