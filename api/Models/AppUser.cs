@@ -9,5 +9,6 @@ namespace api.Models
     public class AppUser : IdentityUser
     {
         //IdentityUser by default provide email, password and also other extension if needed in the future
+        public List<Portfolio> Portfolios { get; set; } = new List<Portfolio>();
     }
 }
