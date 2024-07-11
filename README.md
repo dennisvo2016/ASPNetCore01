@@ -1,7 +1,3 @@
-Here's an improved version of the README for your ASP.NET project:
-
----
-
 # ASPNetCore01
 
 This repository contains the source code for the ASP.NET Web API tutorial series by Teddy Smith.
