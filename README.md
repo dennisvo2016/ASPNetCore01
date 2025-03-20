@@ -1,7 +1,7 @@
 # ASPNetCore01
 
-This repository contains the source code for the ASP.NET Web API tutorial series by Teddy Smith.
-You can follow the tutorial series on [Teddy Smith ASP.NET Web API](https://youtube.com/playlist?list=PL82C6-O4XrHfrGOCPmKmwTO7M0avXyQKc&si=AJRuJb66l9gHXcMI).
+This repository contains the source code for a complete ASP.NET Core Web API demonstrating backend principles, RESTful architecture, and CRUD operations. 
+The implementation is inspired by various resources, including tutorials by Teddy Smith. You can follow the tutorial series on [ASP.NET Web API](https://youtube.com/playlist?list=PL82C6-O4XrHfrGOCPmKmwTO7M0avXyQKc&si=AJRuJb66l9gHXcMI).
 
 For setting up Swagger and JWT in .NET Core Web API, refer to this [guide](https://teddysmith.io/swagger-net-core-web-api-jwt-setup/).
 
